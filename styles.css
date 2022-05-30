@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  bottom: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.content-container {
+  width: 80%;
+  display: grid;
+  gap: 30px;
+  /* grid-template-columns: 1fr 1fr; */
+}
+
+.article {
+  border: 1px solid rgb(167, 164, 164);
+  height: fit-content;
+  padding: 24px 14px;
+  border-radius: 1rem;
+}

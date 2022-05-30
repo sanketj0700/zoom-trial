@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>
+      Zooming trial
+    </title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body onload="init();">
+    <div class="main">
+      <div class="header">
+        Hello World
+      </div>
+      <div class="content">
+        <div class="content-container">
+          <div class="article" id="article-1">
+            <article class="article-1-content" id="article-1-content">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum mattis velit, 
+                at mollis leo eleifend nec. Suspendisse in mauris at lectus placerat gravida. Pellentesque 
+                pellentesque sem et enim egestas consectetur. Donec justo elit, dictum a porttitor vel, 
+                varius id tellus. Praesent eget justo sem. Donec tempus ipsum at lorem facilisis, non 
+                luctus ex volutpat.
+              </p>
+            </article>
+          </div>
+          <article class="article" id="article-2">
+            <p>Nam nibh risus, aliquet at leo ac, placerat varius lorem. Morbi consectetur sapien ut neque 
+              tristique pharetra. Nullam lorem ipsum, tempus id condimentum id, rhoncus sit amet turpis. 
+              Etiam efficitur, arcu nec facilisis finibus, purus erat placerat ex, sed mollis mauris magna 
+              quis diam. In posuere, eros sit amet gravida fermentum, ipsum eros molestie nibh, non tempus 
+              magna lectus rutrum lacus. Sed non ligula ligula. Fusce fermentum felis nec urna viverra 
+              hendrerit. Nulla eget facilisis nibh, eget posuere arcu. Etiam et lacus ex.
+            </p>
+          </article>
+        </div>
+      </div>
+      <div class="footer">
+        Bye World
+      </div>
+    </div>
+  </body>
+
+  <script>
+    const parentDiv = document.querySelector("#article-1");
+    const zoomableDiv = document.querySelector(".article-1-content");
+
+    let initialZoom = 1.0;
+    const incrementalZoom = 0.1;
+
+
+    // on wheel scroll zoom event
+    // zoomableDiv.addEventListener("wheel", (e) => {
+    //   if(e.deltaY < 0) {
+    //     zoomableDiv.style.transform = `scale(${initialZoom -= incrementalZoom})`;
+    //   } else if (e.deltaY > 0) {
+    //     zoomableDiv.style.transform = `scale(${initialZoom += incrementalZoom})`;
+    //   }
+
+    //   if(initialZoom<=1.0) {
+    //     parentDiv.style.overflow = "hidden";
+    //   } else {
+    //     parentDiv.style.overflow = "scroll";
+    //   }
+    // })
+
+    // on pinch zoom event
+    /*
+      Reference Link : https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events/Pinch_zoom_gestures
+    */
+    var evCache = new Array();
+    var prevDiff = -1;
+
+    function init() {
+      var el=document.querySelector(".article-1-content");
+      el.onpointerdown = pointerdown_handler;
+      el.onpointermove = pointermove_handler;
+
+      el.onpointerup = pointerup_handler;
+      el.onpointercancel = pointerup_handler;
+      el.onpointerout = pointerup_handler;
+      el.onpointerleave = pointerup_handler;
+    }
+
+    function pointerdown_handler(ev) {
+      evCache.push(ev);
+      console.log("pointerDown", ev);
+    }
+
+    function pointermove_handler(ev) {
+      console.log("pointerMove", ev);
+
+      for (var i = 0; i < evCache.length; i++) {
+        if (ev.pointerId == evCache[i].pointerId) {
+            evCache[i] = ev;
+        break;
+        }
+      }
+
+      if (evCache.length == 2) {
+        var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
+
+        if (prevDiff > 0) {
+          if (curDiff > prevDiff) {
+            console.log("Pinch moving OUT -> Zoom in", ev);
+            ev.target.style.transform = `scale(${initialZoom += incrementalZoom})`;
+          }
+          if (curDiff < prevDiff) {
+            console.log("Pinch moving IN -> Zoom out",ev);
+            ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;;
+          }
+        }
+
+        if(initialZoom<=1.0) {
+          parentDiv.style.overflow = "hidden";
+        } else {
+          parentDiv.style.overflow = "scroll";
+        }
+
+        prevDiff = curDiff;
+      }
+    }
+
+
+    function pointerup_handler(ev) {
+      console.log(ev.type, ev);
+      remove_event(ev);
+      ev.target.style.transform = `scale(1.0)`;
+      ev.target.style.overflow = "hidden"
+
+      if (evCache.length < 2) {
+        prevDiff = -1;
+      }
+    }
+
+
+    function remove_event(ev) {
+      for (var i = 0; i < evCache.length; i++) {
+        if (evCache[i].pointerId == ev.pointerId) {
+          evCache.splice(i, 1);
+          break;
+        }
+      }
+    }
+
+
+  </script>
+</html>
