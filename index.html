@@ -89,6 +89,7 @@
     }
 
     function pointermove_handler(ev) {
+      ev.preventDefault();
       console.log("pointerMove", ev);
 
       for (var i = 0; i < evCache.length; i++) {
