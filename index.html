@@ -126,8 +126,6 @@
     function pointerup_handler(ev) {
       console.log(ev.type, ev);
       remove_event(ev);
-      ev.target.style.transform = `scale(1.0)`;
-      ev.target.style.overflow = "hidden"
 
       if (evCache.length < 2) {
         prevDiff = -1;
