@@ -48,7 +48,7 @@
     const zoomableDiv = document.querySelector(".article-1-content");
 
     let initialZoom = 1.0;
-    const incrementalZoom = 0.02;
+    const incrementalZoom = 0.1;
 
 
     // on wheel scroll zoom event
@@ -90,7 +90,6 @@
     }
 
     function pointermove_handler(ev) {
-      ev.preventDefault();
       console.log("pointerMove", ev);
 
       for (var i = 0; i < evCache.length; i++) {
