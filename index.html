@@ -51,7 +51,7 @@
     const incrementalZoom = 0.4;
 
 
-    on wheel scroll zoom event
+    // on wheel scroll zoom event
     zoomableDiv.addEventListener("wheel", (e) => {
       if(e.deltaY < 0) {
         zoomableDiv.style.transform = `scale(${initialZoom -= incrementalZoom})`;
