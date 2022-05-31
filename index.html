@@ -51,20 +51,20 @@
     const incrementalZoom = 0.4;
 
 
-    // on wheel scroll zoom event
-    // zoomableDiv.addEventListener("wheel", (e) => {
-    //   if(e.deltaY < 0) {
-    //     zoomableDiv.style.transform = `scale(${initialZoom -= incrementalZoom})`;
-    //   } else if (e.deltaY > 0) {
-    //     zoomableDiv.style.transform = `scale(${initialZoom += incrementalZoom})`;
-    //   }
+    on wheel scroll zoom event
+    zoomableDiv.addEventListener("wheel", (e) => {
+      if(e.deltaY < 0) {
+        zoomableDiv.style.transform = `scale(${initialZoom -= incrementalZoom})`;
+      } else if (e.deltaY > 0) {
+        zoomableDiv.style.transform = `scale(${initialZoom += incrementalZoom})`;
+      }
 
-    //   if(initialZoom<=1.0) {
-    //     parentDiv.style.overflow = "hidden";
-    //   } else {
-    //     parentDiv.style.overflow = "scroll";
-    //   }
-    // })
+      if(initialZoom<=1.0) {
+        parentDiv.style.overflow = "hidden";
+      } else {
+        parentDiv.style.overflow = "scroll";
+      }
+    })
 
     // on pinch zoom event
     /*
@@ -99,7 +99,7 @@
         }
       }
 
-      if (evCache.length == 2) {
+      if (evCache.length == 2 && initialZoom>0.0 && initialZoom<2.50) {
         var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
 
         if (prevDiff > 0) {
