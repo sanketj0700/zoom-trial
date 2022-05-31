@@ -53,9 +53,9 @@
 
     // on wheel scroll zoom event
     zoomableDiv.addEventListener("wheel", (e) => {
-      if(e.deltaY < 0 && initialZoom > 0.0) {
+      if(e.deltaY < 0 && initialZoom >= 1.0) {
         zoomableDiv.style.transform = `scale(${initialZoom -= incrementalZoom})`;
-      } else if (e.deltaY > 0 && initialZoom < 2.50) {
+      } else if (e.deltaY > 0 && initialZoom < 1.75) {
         zoomableDiv.style.transform = `scale(${initialZoom += incrementalZoom})`;
       }
 
@@ -99,7 +99,7 @@
         }
       }
 
-      if (evCache.length == 2 && initialZoom>0.0 && initialZoom<2.50) {
+      if (evCache.length == 2 && initialZoom>=1.0 && initialZoom<1.75) {
         var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
 
         if (prevDiff > 0) {
