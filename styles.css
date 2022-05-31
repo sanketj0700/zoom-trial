@@ -18,7 +18,7 @@
 }
 
 .content-container {
-  width: 80%;
+  width: 80vw;
   display: grid;
   gap: 30px;
   /* grid-template-columns: 1fr 1fr; */
@@ -29,4 +29,5 @@
   height: fit-content;
   padding: 24px 14px;
   border-radius: 1rem;
+  overflow: scroll;
 }
