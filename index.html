@@ -106,14 +106,15 @@
           if (curDiff > prevDiff && initialZoom<=1.60) {
             console.log("Pinch moving OUT -> Zoom in", ev);
             ev.target.style.transform = `scale(${initialZoom += incrementalZoom})`;
+            prevDiff = curDiff;
           }
           if (curDiff < prevDiff && initialZoom>= 1.0) {
             console.log("Pinch moving IN -> Zoom out",ev);
-            ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;;
+            ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;
+            prevDiff = curDiff;
           }
         }
 
-        prevDiff = curDiff;
       }
     }
 
