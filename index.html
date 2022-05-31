@@ -48,7 +48,7 @@
     const zoomableDiv = document.querySelector(".article-1-content");
 
     let initialZoom = 1.0;
-    const incrementalZoom = 0.4;
+    const incrementalZoom = 0.3;
 
 
     // on wheel scroll zoom event
@@ -99,15 +99,15 @@
         }
       }
 
-      if (evCache.length == 2 && initialZoom>=1.0 && initialZoom<1.75) {
+      if (evCache.length == 2 && initialZoom>=0.7 && initialZoom<1.91) {
         var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
 
         if (prevDiff > 0) {
-          if (curDiff > prevDiff) {
+          if (curDiff > prevDiff && initialZoom<=1.60) {
             console.log("Pinch moving OUT -> Zoom in", ev);
             ev.target.style.transform = `scale(${initialZoom += incrementalZoom})`;
           }
-          if (curDiff < prevDiff) {
+          if (curDiff < prevDiff && initialZoom>= 1.0) {
             console.log("Pinch moving IN -> Zoom out",ev);
             ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;;
           }
