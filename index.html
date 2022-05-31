@@ -16,7 +16,7 @@
       <div class="content">
         <div class="content-container">
           <div class="article" id="article-1">
-            <article class="article-1-content" id="article-1-content">
+            <div class="article-1-content" id="article-1-content">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum mattis velit, 
                 at mollis leo eleifend nec. Suspendisse in mauris at lectus placerat gravida. Pellentesque 
@@ -24,7 +24,7 @@
                 varius id tellus. Praesent eget justo sem. Donec tempus ipsum at lorem facilisis, non 
                 luctus ex volutpat.
               </p>
-            </article>
+            </div>
           </div>
           <article class="article" id="article-2">
             <p>Nam nibh risus, aliquet at leo ac, placerat varius lorem. Morbi consectetur sapien ut neque 
@@ -48,7 +48,7 @@
     const zoomableDiv = document.querySelector(".article-1-content");
 
     let initialZoom = 1.0;
-    const incrementalZoom = 0.2;
+    const incrementalZoom = 0.4;
 
 
     // on wheel scroll zoom event
@@ -111,12 +111,6 @@
             console.log("Pinch moving IN -> Zoom out",ev);
             ev.target.style.transform = `scale(${initialZoom -= incrementalZoom})`;;
           }
-        }
-
-        if(initialZoom<=1.0) {
-          parentDiv.style.overflow = "hidden";
-        } else {
-          parentDiv.style.overflow = "scroll";
         }
 
         prevDiff = curDiff;
